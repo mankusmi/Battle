@@ -12,20 +12,20 @@ print("\n\n")
 print("\n\n")
 
 #create black magic
-fire = Spell("Fire", 10, 100, "black")
-thunder = Spell("Thunder", 10, 100, "black")
-blizzard = Spell("Blizzard", 10, 100, "black")
-meteor = Spell("Meteor", 20, 200, "black")
+fire = Spell("Fire", 25, 100, "black")
+thunder = Spell("Thunder", 25, 600, "black")
+blizzard = Spell("Blizzard", 25, 600, "black")
+meteor = Spell("Meteor", 40, 1200, "black")
 quake = Spell("Quake", 14, 120, "black")
 
 #create white magic
-cure = Spell("Cure", 12, 120, "white")
-cura = Spell("Cura", 18, 200, "white")
+cure = Spell("Cure", 25, 620, "white")
+cura = Spell("Cura", 32, 1500, "white")
 
 #create some items
 potion = Item("Potion", "potion", "Heals 50 HP", 50)
 hipotion = Item("Hi-Potion", "potion", "Heals 100 HP", 100)
-superpotion = Item("Super Potion", "potion", "Heals 500 HP", 500)
+superpotion = Item("Super Potion", "potion", "Heals 1000 HP", 1000)
 elixer = Item("Elixer", "elixer", "Fully restores HP/MP of one party number", 9999)
 hielixer = Item("MegaElixer", "elixer", "Fully restores party's HP/MP", 9999)
 
@@ -37,13 +37,13 @@ player_items = [{"item": potion, "quantity": 15}, {"item": hipotion, "quantity":
                 {"item": hielixer, "quantity": 2}, {"item": grenade, "quantity": 5}]
 
 #Instantiate people
-player1 = Person("Perkunas:", 460, 65, 60, 34, player_spells, player_items)
-player2 = Person("Gabija  :", 460, 65, 60, 34, player_spells, player_items)
-player3 = Person("Sarunas :", 460, 65, 60, 34, player_spells, player_items)
+player1 = Person("Perkunas:", 3260, 132, 300, 34, player_spells, player_items)
+player2 = Person("Gabija  :", 4160, 188, 311, 34, player_spells, player_items)
+player3 = Person("Sarunas :", 3089, 174, 288, 34, player_spells, player_items)
 
 players = [player1, player2, player3]
 
-enemy = Person("Magus",1200, 65, 45, 25, [], [])
+enemy = Person("Magus",11200, 701, 525, 25, [], [])
 
 running = True
 i = 0
@@ -54,12 +54,14 @@ while running:
     print("=========================")
 
     print("\n\n")
-    print("NAME                    HP                                      MP")
+    print("NAME                     HP                                     MP")
 
     for player in players:
         player.get_stats()
 
     print("\n")
+
+    enemy.get_enemy_stats()
 
     for player in players:
 
@@ -118,6 +120,9 @@ while running:
                 player.heal(item.prop)
                 print(bcolors.OKGREEN + "\n" + item.name + "heals for " + str(item.prop) + "HP" +bcolors.ENDC)
             elif item.type == "elixer":
+
+                    if item.name == "MegaElixer":
+                        
                 player.hp = player.maxhp
                 player.mp = player.maxmp
                 print(bcolors.OKGREEN + "\n" + item.name + " fully restores HP/MP." + bcolors.ENDC)
