@@ -42,9 +42,12 @@ player1 = Person("Perkunas:", 3260, 132, 300, 34, player_spells, player_items)
 player2 = Person("Gabija  :", 4160, 188, 311, 34, player_spells, player_items)
 player3 = Person("Sarunas :", 3089, 174, 288, 34, player_spells, player_items)
 
-players = [player1, player2, player3]
+enemy1 = Person("Imp", 1250, 130, 560, 325, [], [])
+enemy2 = Person("Magus",11200, 701, 525, 25, [], [])
+enemy3 = Person("Imp", 1250, 130, 560, 325, [], [])
 
-enemy = Person("Magus",11200, 701, 525, 25, [], [])
+players = [player1, player2, player3]
+enemies = [enemy1, enemy2, enemy3]
 
 running = True
 i = 0
@@ -62,7 +65,8 @@ while running:
 
     print("\n")
 
-    enemy.get_enemy_stats()
+    for enemy in enemies:
+        enemy.get_enemy_stats()
 
     for player in players:
 
@@ -73,6 +77,7 @@ while running:
 
         if index == 0:
             dmg = player.generate_damage()
+            enemy = player.choose_target(enemies)
             enemy.take_damage(dmg)
             print("You attacked for", dmg, "points of damage.")
 
