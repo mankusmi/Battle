@@ -1,6 +1,7 @@
 from Classes.game import Person, bcolors
 from Classes.magic import Spell
 from Classes.Inventory import Item
+import random
 
 
 print("\n\n")
@@ -121,20 +122,25 @@ while running:
                 print(bcolors.OKGREEN + "\n" + item.name + "heals for " + str(item.prop) + "HP" +bcolors.ENDC)
             elif item.type == "elixer":
 
-                    if item.name == "MegaElixer":
-                        
-                player.hp = player.maxhp
-                player.mp = player.maxmp
+                if item.name == "MegaElixer":
+                        for i in players:
+                            i.hp = i.maxhp
+                            i.mp = i.maxmp
+                else:
+                        player.hp = player.maxhp
+                        player.mp = player.maxmp
                 print(bcolors.OKGREEN + "\n" + item.name + " fully restores HP/MP." + bcolors.ENDC)
             elif item.type == "attack":
                 enemy.take_damage(item.prop)
                 print(bcolors.FAIL + "\n" + item.name + " deals " + str(item.prop) + " points of damage" + bcolors.ENDC)
 
     enemy_choice = 1
+    target = random.randrange(0, 2)
 
     enemy_dmg = enemy.generate_damage()
 
-    player1.take_damage(enemy_dmg)
+
+    players[target].take_damage(enemy_dmg)
     print("Enemy attacks for", enemy_dmg)
 
     print("====================")
