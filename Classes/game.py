@@ -93,7 +93,7 @@ class Person:
         for enemy in enemies:
             print("        " + str(i) + "." + enemy.name)
             i += 1
-        choice = int(input(print("    Choose target:")) - 1
+        choice = int(input(print("    Choose target:"))) - 1
         return choice
 
 
